@@ -10,14 +10,14 @@ Lillemare has set up near the Steam Centurion exhibit in Tel Vos's Central Tower
 
 | Spell | Effect | Range | Magicka |
 |-------|--------|-------|---------|
-| Suppress Magicka (Self) | Reduce cast spell effects | Self | 90 |
-| Suppress Magicka (Touch) | Reduce cast spell effects | Touch | 90 |
-| Suppress Magicka (Target) | Reduce cast spell effects | Target | 135 |
-| Suppress Enchantment (Self) | Reduce enchantment effects | Self | 90 |
-| Suppress Enchantment (Touch) | Reduce enchantment effects | Touch | 90 |
-| Suppress Enchantment (Target) | Reduce enchantment effects | Target | 135 |
+| Suppress Magicka (Self) | Reduce cast spell effects | Self | 10 |
+| Suppress Magicka (Touch) | Reduce cast spell effects | Touch | 10 |
+| Suppress Magicka (Target) | Reduce cast spell effects | Target | 15 |
+| Suppress Enchantment (Self) | Reduce enchantment effects | Self | 10 |
+| Suppress Enchantment (Touch) | Reduce enchantment effects | Touch | 10 |
+| Suppress Enchantment (Target) | Reduce enchantment effects | Target | 15 |
 
-Each spell's magnitude equals the percentage reduction applied to the target (10–50%, rolled per cast). Cast success uses Mysticism and the spell's magicka cost (see [SUPPRESSION_DEV.md](SUPPRESSION_DEV.md)).
+Each spell's magnitude equals the percentage reduction applied to the target (**0–20%**, rolled per cast) for **10 seconds**. Cast success uses Mysticism and the spell's magicka cost (see [SUPPRESSION_DEV.md](SUPPRESSION_DEV.md)).
 
 Gameplay reference (what is and is not suppressed): **[SUPPRESSION_RULES.md](SUPPRESSION_RULES.md)**.
 
@@ -40,7 +40,7 @@ Gameplay reference (what is and is not suppressed): **[SUPPRESSION_RULES.md](SUP
 
 Rebuild the plugin after editing dialogue: `node tools/build_esp.mjs`.
 
-Spell behavior (gameplay reference): [SUPPRESSION_RULES.md](SUPPRESSION_RULES.md). Technical details: [SUPPRESSION_DEV.md](SUPPRESSION_DEV.md).
+Spell behavior (gameplay reference): [SUPPRESSION_RULES.md](SUPPRESSION_RULES.md). Technical details: [SUPPRESSION_DEV.md](SUPPRESSION_DEV.md). Dialogue source notes: [Dialogue.md](Dialogue.md).
 
 ## Quest walkthrough
 
