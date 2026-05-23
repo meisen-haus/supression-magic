@@ -1,0 +1,73 @@
+# Build supression_spells_dialogue.omwaddon and attach release assets when a release is published.
+name: Release build
+
+on:
+  release:
+    types: [published]
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: 'Tag name for the zip filename (e.g. 0.1.0). Ignored when triggered by a published release.'
+        required: true
+        default: 'manual'
+
+permissions:
+  contents: write
+
+jobs:
+  build-and-upload:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          check-latest: true
+
+      - name: Resolve version
+        id: version
+        run: |
+          if [ "${{ github.event_name }}" = "release" ]; then
+            echo "tag=${{ github.event.release.tag_name }}" >> "$GITHUB_OUTPUT"
+          else
+            echo "tag=${{ inputs.tag }}" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Build dialogue addon
+        run: node tools/build_esp.mjs
+
+      - name: Verify addon output
+        run: test -f supression_spells_dialogue.omwaddon
+
+      - name: Package mod zip
+        run: |
+          VERSION="${{ steps.version.outputs.tag }}"
+          STAGING="dist/supression-spells"
+          ZIP="dist/supression-spells-${VERSION}.zip"
+          mkdir -p "$STAGING"
+          cp supression_spells.omwscripts supression_spells_dialogue.omwaddon README.md CHANGELOG.md LICENSE "$STAGING/"
+          cp -r scripts icons l10n "$STAGING/"
+          mkdir -p dist
+          (cd dist && zip -r "supression-spells-${VERSION}.zip" supression-spells)
+          ls -la dist/
+          test -f "dist/supression-spells-${VERSION}.zip"
+
+      - name: Upload release assets
+        if: github.event_name == 'release'
+        uses: softprops/action-gh-release@v2
+        with:
+          files: |
+            supression_spells_dialogue.omwaddon
+            dist/supression-spells-${{ steps.version.outputs.tag }}.zip
+
+      - name: Upload workflow artifacts (manual run)
+        if: github.event_name == 'workflow_dispatch'
+        uses: actions/upload-artifact@v4
+        with:
+          name: supression-spells-${{ steps.version.outputs.tag }}
+          path: |
+            supression_spells_dialogue.omwaddon
+            dist/supression-spells-${{ steps.version.outputs.tag }}.zip

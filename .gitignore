@@ -1,0 +1,11 @@
+# Release staging / zip output
+dist/
+
+# Environment variables
+.env
+.env.*
+
+# Markdown (keep project docs tracked)
+*.md
+!README.md
+!CHANGELOG.md

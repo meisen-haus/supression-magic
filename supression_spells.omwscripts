@@ -1,0 +1,7 @@
+# Suppression Spells — OpenMW 0.51+ Lua mod
+# LOAD must be first: openmw.content only works in load-context scripts.
+
+LOAD: scripts/supression_spells/content_register.lua
+GLOBAL: scripts/supression_spells/global.lua
+PLAYER: scripts/supression_spells/player.lua
+NPC: scripts/supression_spells/npc_equip.lua

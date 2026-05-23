@@ -1,0 +1,5 @@
+SupressionSpells: "Suppression Spells"
+suppressMagicka: "Suppress Magicka"
+suppressMagickaDescription: "Reduces the effectiveness of incoming spell effects on the target by a percentage equal to the spell's magnitude."
+suppressEnchantment: "Suppress Enchantment"
+suppressEnchantmentDescription: "Reduces the effectiveness of enchantment effects on the target by a percentage equal to the spell's magnitude."
